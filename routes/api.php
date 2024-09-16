@@ -23,6 +23,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // Data Jenis Cuti endPoint
     Route::apiResource('/data-jenis-cutis', DataJenisCutiController::class);
 
+    // Kalender End Point
+    Route::get('/data-cutis/kalender', [DataCutiController::class, 'indexKalenderCuti']);
+    Route::get('/data-cutis/kalender/{kalender}', [DataCutiController::class, 'showKalenderCuti']);
+
     // Data Cuti endPoint
     Route::apiResource('/data-cutis', DataCutiController::class);
     Route::get('/data-cutis/nik/{nik}', [DataCutiController::class, 'showByNik']);

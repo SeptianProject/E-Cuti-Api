@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CutiStoreRequest;
 use App\Http\Requests\CutiUpdateRequest;
 use App\Http\Resources\CutiResource;
+use App\Http\Resources\KalenderResource;
 use App\Models\DataCuti;
+use App\Models\DataJenisCuti;
 use Illuminate\Http\Request;
 
 class DataCutiController extends Controller
@@ -17,6 +19,17 @@ class DataCutiController extends Controller
     public function index()
     {
         return CutiResource::collection(DataCuti::all());
+    }
+
+    public function indexKalenderCuti()
+    {
+        return KalenderResource::collection(DataCuti::all());
+    }
+
+    public function showKalenderCuti($kalender)
+    {
+        $dataCuti = DataCuti::where('id_cuti', $kalender)->firstOrFail();
+        return new KalenderResource($dataCuti);
     }
 
     /**
