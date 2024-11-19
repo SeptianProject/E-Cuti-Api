@@ -17,7 +17,7 @@ class KalenderResource extends JsonResource
     {
         return [
             'id' => $this->id_cuti,
-            'title' => DataJenisCuti::find($this->id_jenis_cuti)->jenis_cuti,
+            'title' => $this->nama_pegawai . ' - ' . $this->keterangan . ' - ' . DataJenisCuti::find($this->id_jenis_cuti)->jenis_cuti,
             'start' => $this->mulai_cuti,
             'end' => $this->akhir_cuti,
         ];

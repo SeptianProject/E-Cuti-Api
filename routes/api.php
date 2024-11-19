@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Data Cuti endPoint
     Route::apiResource('/data-cutis', DataCutiController::class);
     Route::get('/data-cutis/nik/{nik}', [DataCutiController::class, 'showByNik']);
+    Route::get('/data-cutis/jumlah-cuti/{nik}', [DataCutiController::class, 'showByLeaveAmount']);
 
     // Data Notifikasi endPoint
     Route::apiResource('/notifikasis', NotifikasiController::class);

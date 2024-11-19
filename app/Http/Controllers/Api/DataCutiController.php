@@ -6,10 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CutiStoreRequest;
 use App\Http\Requests\CutiUpdateRequest;
 use App\Http\Resources\CutiResource;
+use App\Http\Resources\JumlahCutiResource;
 use App\Http\Resources\KalenderResource;
 use App\Models\DataCuti;
-use App\Models\DataJenisCuti;
-use Illuminate\Http\Request;
 
 class DataCutiController extends Controller
 {
@@ -18,7 +17,8 @@ class DataCutiController extends Controller
      */
     public function index()
     {
-        return CutiResource::collection(DataCuti::all());
+        $dataCuti = DataCuti::orderBy('id_cuti', 'desc')->get();
+        return CutiResource::collection($dataCuti);
     }
 
     public function indexKalenderCuti()
@@ -50,9 +50,14 @@ class DataCutiController extends Controller
 
     public function showByNik($nik)
     {
-        $dataCuti = DataCuti::where('nik', $nik)->firstOrFail();
+        $dataCuti = DataCuti::where('nik', $nik)->orderBy('id_cuti', 'desc')->get();
+        return CutiResource::collection($dataCuti);
+    }
 
-        return new CutiResource($dataCuti);
+    public function showByLeaveAmount($nik)
+    {
+        $dataCuti = DataCuti::where('nik', $nik)->firstOrFail();
+        return new JumlahCutiResource($dataCuti);
     }
 
     /**
